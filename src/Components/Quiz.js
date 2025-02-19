@@ -33,15 +33,18 @@ const Quiz = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(null);
 
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer);
+    setIsCorrect(answer === questions[currentIndex].answer);
   };
 
   const handleNextQuestion = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
       setSelectedAnswer(null);
+      setIsCorrect(null);
     }
   };
 
@@ -49,8 +52,10 @@ const Quiz = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
       setSelectedAnswer(null);
+      setIsCorrect(null);
     }
   };
+
   return (
     <>
       <div>
@@ -81,6 +86,17 @@ const Quiz = () => {
             </li>
           ))}
         </ol>
+        {selectedAnswer && (
+          <p
+            style={{
+              fontSize: "18px",
+              fontWeight: "bold",
+              color: isCorrect ? "green" : "red",
+            }}
+          >
+            {isCorrect ? "Correct" : "Wrong answer"}
+          </p>
+        )}
       </div>
 
       <button
