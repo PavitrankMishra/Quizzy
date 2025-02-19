@@ -44,6 +44,13 @@ const Quiz = () => {
       setSelectedAnswer(null);
     }
   };
+
+  const handlePreviousQuestions = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      setSelectedAnswer(null);
+    }
+  };
   return (
     <>
       <div>
@@ -75,6 +82,22 @@ const Quiz = () => {
           ))}
         </ol>
       </div>
+
+      <button
+        onClick={handlePreviousQuestions}
+        disabled={currentIndex === 0}
+        style={{
+          marginTop: "20px",
+          padding: "10px 20px",
+          backgroundColor: "blue",
+          color: "white",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "16px",
+        }}
+      >
+        Previous
+      </button>
 
       <button
         onClick={handleNextQuestion}
